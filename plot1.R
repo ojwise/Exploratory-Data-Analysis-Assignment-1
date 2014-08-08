@@ -1,4 +1,9 @@
-hpc1<-read.table("exdata_data_household_power_consumption/household_power_consumption.txt", header = T, sep = ";", na.strings = "?")
+url<-"https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+if(!file.exists("household_power_consumption.txt")){
+    download.file(url, "household_power_consupmption.txt")
+    unzip("household_power_consumption.txt")
+}
+hpc1<-read.table("household_power_consumption.txt", header = T, sep = ";", na.strings = "?")
 hpc3<-transform(hpc1, 
                 Time = strptime(Time, "%H:%M;$S"),
                 Global_active_power = as.numeric(Global_active_power), 
